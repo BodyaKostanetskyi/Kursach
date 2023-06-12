@@ -1,0 +1,16 @@
+﻿<div class="row" style="min-height: 30vh; max-height: 50vh; display:flex;  overflow-x: auto;">
+	<div style="display: flex; flex-wrap: nowrap;">
+	@for (; i < QList.Count(); i++)
+	{
+		<div class="col-3 m-3">				
+			<Card survey="QList[i]" answers="AList" numberOfSurvey="i+1"></Card>
+		</div>
+	}
+	</div>
+</div>
+
+@code {
+	[Parameter] public List<Survey> QList { get; set; }
+	[Parameter] public string[] AList { get; set; }
+	int i = 0;
+}

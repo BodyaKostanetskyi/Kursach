@@ -1,0 +1,93 @@
+﻿<div class="row">
+	<div class="col card h-50 w-75 m-3 bg-info">
+		@if (!flag)
+		{
+			<Slider QList="questions" AList="answers"></Slider>
+		}
+		else
+		{
+			<p class="d-flex align-items-center justify-content-center" style="font-size:100px">Вітаємо, ви пройшли тест</p>
+		}
+	</div>
+</div>
+<div class="row">
+	<div class="col-6 d-flex justify-content-center">
+		<button type="button" style="font-size:large; max-height:50px; max-width:200px; min-height:50px; min-width:200px;" class="btn btn-outline-info h-50 w-75 m-3" @onclick="(() => flag = !flag)">
+			@if (flag)
+			{
+				<div>Пройти тест знову</div>
+			}
+			else
+			{
+				<div>Отримати відповідь</div>
+			}
+		</button>
+	</div>
+	<div class="col-6 d-flex justify-content-center" style="font-size:x-large">
+		<p class="form-text text-info">
+			@if (flag)
+			{
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Ваша відповідь</th>
+							<th>Правильна відповідь</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var question in questions)
+						{
+							int index = questions.IndexOf(question);
+							<tr>
+								<td>@answers[index]</td>
+								<td>@question.Answer</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			}
+		</p>
+	</div>
+</div>
+
+@code {
+	bool flag = false;
+	List<Survey> questions;
+	string[] answers;
+
+	protected override void OnInitialized()
+	{
+		questions = new List<Survey>()
+		{
+			new Survey(
+				"Це перше питання?",
+				"Так"
+			),
+			new Survey(
+				"Це перше питання?",
+				"Ні"
+			),
+			new Survey(
+				"Яке це питання за номером?",
+				"3"
+			),
+			new Survey(
+				"Цікаво проходити тест?",
+				"Ні"
+			),
+			new Survey(
+				"Чому?",
+				""
+			),
+			new Survey(
+				"Вам сподобалося наш тест?",
+				"Так"
+			),
+			new Survey(
+				"Яку оцінки ви нам поставите по 10-ти бальній системі?",
+				"10"
+			),
+		};
+		answers = new string[questions.Count()];
+	}
+}
